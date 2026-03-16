@@ -7,11 +7,67 @@ const LETTER_PARAGRAPHS = [
 
 // Rutas de tus fotos (ponlas dentro de /assets)
 const PHOTOS = [
-  { src: "assets/foto1.jpg", caption: "Nuestro inicio" },
-  { src: "assets/foto2.jpg", caption: "Una de mis favoritas" },
-  { src: "assets/foto3.jpg", caption: "Risa que me enamora" },
-  { src: "assets/foto4.jpg", caption: "Contigo, a todas" }
+  { src: "assets/1.jpeg", caption: "Cres que se me iba a olvidar que me dedicaste esta luna?" },
+  { src: "assets/2.jpeg", caption: "Una de mis favoritas, de las primeras cuando inciamos" },
+  { src: "assets/3.jpeg", caption: "Esta me Enacanta JAJAJA, jamas pense que pasara lo de esa noche y si nos ponemos a pensar es una locura." },
+  { src: "assets/4.jpeg", caption: "LA FOTO HABLA POR SI SOLA" },
+  { src: "assets/5.jpeg", caption: "Ayyy esta fue en una de tus citas favoritas?" },
+  { src: "assets/6.jpeg", caption: "esta fue casi antes de terminar, creo jeje" },
+  { src: "assets/7.jpeg", caption: "Gracias a Dios hemos cambiado un poco JAJ" }
 ];
+function renderGallery(items) {
+  const grid = document.getElementById("galleryGrid");
+  grid.innerHTML = "";
+
+  const rotations = [-2, -1, 0, 1.5, 2.5]; // toque “polaroid” ligeramente girado
+
+  items.forEach((it, idx) => {
+    const frame = document.createElement("figure");
+    frame.className = "polaroid";
+    frame.style.setProperty("--rot", rotations[idx % rotations.length] + "deg");
+
+    const img = document.createElement("img");
+    img.src = it.src;
+    img.alt = it.caption || "Foto";
+    img.loading = "lazy";
+    img.addEventListener("click", () => openLightbox(it.src));
+
+    const cap = document.createElement("figcaption");
+    cap.className = "caption";
+    cap.textContent = it.caption || "";
+
+    frame.appendChild(img);
+    frame.appendChild(cap);
+    grid.appendChild(frame);
+  });
+}
+function openLightbox(src) {
+  const lb = document.getElementById("lightbox");
+  const img = document.getElementById("lightboxImg");
+  img.src = src;
+  lb.classList.remove("hidden");
+}
+function closeLightbox() {
+  document.getElementById("lightbox").classList.add("hidden");
+}
+document.getElementById("lightbox").addEventListener("click", closeLightbox);
+
+document.getElementById("openLetterBtn").addEventListener("click", () => {
+  // (lo que ya tienes)
+  document.getElementById("hero").classList.add("hidden");
+  document.getElementById("letter").classList.remove("hidden");
+  document.getElementById("music").classList.remove("hidden");   // si usas la sección de música
+  document.getElementById("gallery").classList.remove("hidden"); // ← mostrar galería
+
+  // Renderizar la galería
+  renderGallery(PHOTOS);
+
+  // (tu carta / scroll / etc.)
+});
+
+
+
+
 
 // ¿Quieres música? Coloca cancion.mp3 en /assets
 const MUSIC_ENABLED = true;
@@ -23,6 +79,8 @@ document.getElementById("openLetterBtn").addEventListener("click", () => {
   document.getElementById("music").classList.remove("hidden"); // ← importante
   // ... lo demás que ya tengas (galería, texto, etc.)
 });
+
+
 
 document.getElementById("openLetterBtn").addEventListener("click", async () => {
   // Oculta la portada
