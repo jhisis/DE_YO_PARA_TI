@@ -13,7 +13,8 @@ const PHOTOS = [
   { src: "assets/4.jpeg", caption: "LA FOTO HABLA POR SI SOLA" },
   { src: "assets/5.jpeg", caption: "Ayyy esta fue en una de tus citas favoritas?" },
   { src: "assets/6.jpeg", caption: "esta fue casi antes de terminar, creo jeje" },
-  { src: "assets/7.jpeg", caption: "Gracias a Dios hemos cambiado un poco JAJ" }
+  { src: "assets/7.jpeg", caption: "Gracias a Dios hemos cambiado un poco JAJ" },
+  { src: "assets/8.jpeg", caption: "Obviamente mi Moto es mas bonita" }
 ];
 function renderGallery(items) {
   const grid = document.getElementById("galleryGrid");
