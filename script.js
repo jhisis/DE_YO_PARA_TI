@@ -16,6 +16,14 @@ const PHOTOS = [
 // ¿Quieres música? Coloca cancion.mp3 en /assets
 const MUSIC_ENABLED = true;
 const MUSIC_SRC = "assets/cancion.mp3";
+
+document.getElementById("openLetterBtn").addEventListener("click", () => {
+  document.getElementById("hero").classList.add("hidden");
+  document.getElementById("letter").classList.remove("hidden");
+  document.getElementById("music").classList.remove("hidden"); // ← importante
+  // ... lo demás que ya tengas (galería, texto, etc.)
+});
+
 document.getElementById("openLetterBtn").addEventListener("click", async () => {
   // Oculta la portada
   document.getElementById("hero").classList.add("hidden");
