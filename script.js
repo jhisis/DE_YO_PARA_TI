@@ -16,6 +16,33 @@ const PHOTOS = [
 // ¿Quieres música? Coloca cancion.mp3 en /assets
 const MUSIC_ENABLED = true;
 const MUSIC_SRC = "assets/cancion.mp3";
+document.getElementById("openLetterBtn").addEventListener("click", async () => {
+  // Oculta la portada
+  document.getElementById("hero").classList.add("hidden");
+
+  // Muestra la carta
+  document.getElementById("letter").classList.remove("hidden");
+
+  // Muestra la música
+  const musicSection = document.getElementById("music");
+  musicSection.classList.remove("hidden");
+
+  // Texto de la carta
+  document.getElementById("letterContent").innerHTML = `
+    <p>Gracias por ser como eres.</p>
+    <p>Gracias por acompañarme incluso en la distancia.</p>
+    <p>Este regalo es pequeño, pero lo hice con todo mi amor 💙</p>
+  `;
+
+  // Intentar reproducir la música
+  const audio = document.getElementById("audio");
+  try {
+    await audio.play();
+  } catch (e) {
+    // En celulares puede requerir tocar Play
+    console.log("El usuario debe presionar play manualmente");
+  }
+});
 
 // ----- Lógica -----
 
