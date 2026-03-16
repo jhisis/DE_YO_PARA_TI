@@ -67,9 +67,6 @@ document.getElementById("openLetterBtn").addEventListener("click", () => {
 });
 
 
-
-
-
 // ¿Quieres música? Coloca cancion.mp3 en /assets
 const MUSIC_ENABLED = true;
 const MUSIC_SRC = "assets/cancion.mp3";
@@ -110,6 +107,20 @@ document.getElementById("openLetterBtn").addEventListener("click", async () => {
     console.log("El usuario debe presionar play manualmente");
   }
 });
+
+
+document.getElementById("openLetterBtn").addEventListener("click", () => {
+  document.getElementById("hero").classList.add("hidden");
+
+  // Mostrar secciones
+  document.getElementById("letter").classList.remove("hidden");
+  document.getElementById("music").classList.remove("hidden");
+  document.getElementById("gallery").classList.remove("hidden");
+
+  // Si usas letterContent para más texto dinámico, aquí lo llenas:
+  // document.getElementById("letterContent").innerHTML = `...`;
+});
+
 
 // ----- Lógica -----
 
