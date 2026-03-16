@@ -3,32 +3,71 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Para ti con cariño 💙</title>
+  <title>Para ti 💙</title>
 
   <link rel="stylesheet" href="style.css">
+  <!-- Vista previa al compartir -->
+  <meta property="og:title" content="Para ti 💙">
+  <meta property="og:description" content="Una carta hecha con amor para ti.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/portada.jpg">
 </head>
 <body>
 
   <header class="center">
     <h1 id="title">Para ti 💙</h1>
-    <p id="subtitle">Feliz Día del Hombre Mi Corazon</p>
+    <p id="subtitle">Feliz Día del Hombre, mi corazón</p>
   </header>
 
   <main>
+    <!-- Portada -->
     <section id="hero" class="card center">
-      <p>Hice esto con mucho amor para ti.</p>
-      <button id="openLetterBtn">Abrir la carta</button>
+      <p class="lead">Hice esto con mucho amor para ti.</p>
+      <button id="openLetterBtn" class="btn">Abrir la carta</button>
+      <div class="small mt-8">Consejo: Mi corazón sube el volumen🎵</div>
     </section>
 
+    <!-- Carta -->
     <section id="letter" class="card hidden">
-      <h2>Nuestra carta</h2>
+      <h2>Carta para mi Baterista Favorito</h2>
       <div id="letterContent"></div>
+    </section>
+
+  <!-- Música (YouTube) -->
+<section id="music" class="card hidden">
+  <h2>Una canción para ti 🎵</h2>
+
+  <div class="video-container">
+    <iframe
+      src="https://www.youtube.com/embed/KuY1JGYYXCw?si=BU_vdl8YdQ_HA-LT"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  <p class="small">Esta canción siempre me recuerda a ti💙</p>
+</section>
+
+    <!-- Galería con marcos tipo polaroid -->
+    <section id="gallery" class="card hidden">
+      <h2>Momentos favoritos</h2>
+      <div id="galleryGrid" class="polaroid-grid">
+        <!-- Las fotos se insertan desde script.js -->
+      </div>
     </section>
   </main>
 
   <footer class="center">
-    <small>Hecho con amor por tu India</small>
+    <small>Hecho con 💙 por Jhicela</small>
   </footer>
+
+  <!-- Lightbox para ver fotos en grande -->
+  <div id="lightbox" class="lightbox hidden" role="dialog" aria-label="Visor de fotos">
+    <img id="lightboxImg" alt="Foto ampliada">
+  </div>
 
   <script src="script.js"></script>
 </body>
