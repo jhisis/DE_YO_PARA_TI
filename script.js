@@ -2,7 +2,7 @@
 const LETTER_PARAGRAPHS = [
   "Gracias por ser como eres.",
   "Gracias por acompañarme incluso en la distancia.",
-  "Este regalo es pequeño, pero lo hice con todo mi amor 💙"
+  "Este regalo es pequeño y quiza sin valor alguno, pero lo hice con todo mi amor 💙"
 ];
 
 // Rutas de tus fotos (ponlas dentro de /assets)
