@@ -18,14 +18,77 @@ body {
   margin: 20px auto;
 }
 
-button {
-  padding: 10px 20px;
+/* Botón base elegante */
+.btn {
+  btn-bg1: #7dd3fc;          /* celeste */
+  btn-bg2: #60a5fa;          /* azul */
+  btn-text: #0b1224;         /* texto oscuro */
+  btn-shadow: 0 12px 30px rgba(0,0,0,.35);
+  btn-radius: 14px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 14px 22px;          /* más grande que antes */
+  min-width: 220px;            /* ancho mínimo para presencia */
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: .3px;
+
+  color: var(--btn-text);
+  background: linear-gradient(135deg, var(--btn-bg1), var(--btn-bg2));
   border: none;
-  border-radius: 10px;
-  background: #60a5fa;
-  font-weight: bold;
+  border-radius: var(--btn-radius);
+  box-shadow: var(--btn-shadow);
   cursor: pointer;
+
+  transition: transform .08s ease, filter .2s ease, box-shadow .2s ease;
+  text-decoration: none;
+  user-select: none;
 }
+
+/* Tamaño extra grande (puedes usar esta clase adicional) */
+.btn--xl {
+  padding: 18px 28px;
+  font-size: 1.15rem;
+  border-radius: 16px;
+  min-width: 260px;
+}
+
+/* Hover/Active */
+.btn:hover { filter: brightness(1.05); }
+.btn:active { transform: translateY(1px) scale(.99); }
+
+/* Icono dentro del botón */
+.btn svg {
+  width: 22px; height: 22px;
+  flex: 0 0 auto;
+}
+
+/* Respeta accesibilidad: menos animación si el usuario lo pide */
+@media (prefers-reduced-motion: reduce) {
+  .btn { transition: none; }
+}
+
+.btn--glass {
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.08));
+  color: #eaf2ff;
+  border: 1px solid rgba(255,255,255,.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow:
+    0 12px 28px rgba(0,0,0,.35),
+    inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.btn--glass:hover {
+  box-shadow:
+    0 16px 34px rgba(0,0,0,.45),
+    inset 0 0 0 1px rgba(255,255,255,.1);
+  filter: brightness(1.06);
+}
+
 
 .video-container {
   position: relative;
