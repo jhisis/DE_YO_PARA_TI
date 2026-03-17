@@ -174,3 +174,105 @@ body {
 .text-block p {
   margin-bottom: 10px;
 }
+
+/* -------- Transiciones generales -------- */
+.fade-enter {
+  opacity: 0;
+  transform: translateY(8px);
+  filter: blur(4px);
+}
+.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition: opacity .5s ease, transform .5s ease, filter .5s ease;
+}
+
+.fade-out {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+.fade-out-active {
+  opacity: 0;
+  transform: translateY(-6px);
+  filter: blur(2px);
+  transition: opacity .4s ease, transform .4s ease, filter .4s ease;
+}
+
+/* Respetar accesibilidad: menos animación si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+  .fade-enter, .fade-out,
+  .fade-enter-active, .fade-out-active {
+    transition: none !important;
+    transform: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* -------- Overlay de apertura -------- */
+.overlay {
+  position: fixed; inset: 0;
+  background: radial-gradient(1000px 700px at 30% -10%, rgba(255,255,255,.08), rgba(0,0,0,.72) 40%, rgba(0,0,0,.86));
+  display: grid;
+  place-items: center;
+  z-index: 100;
+}
+.overlay.hidden { display: none; }
+
+.overlay-content {
+  text-align: center;
+  color: #e5e7eb;
+  animation: popIn .4s ease both;
+}
+.overlay-heart {
+  font-size: 42px;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,.35));
+  animation: heartbeat 1.2s ease-in-out infinite;
+}
+.overlay-text {
+  margin-top: 10px;
+  font-weight: 700;
+  letter-spacing: .3px;
+}
+
+/* Latido del corazón del overlay */
+@keyframes heartbeat {
+  0%, 28%, 100% { transform: scale(1); }
+  14% { transform: scale(1.12); }
+}
+@keyframes popIn {
+  from { opacity: 0; transform: translateY(8px) scale(.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* -------- Aparición en cascada -------- */
+.reveal-seq > * { opacity: 0; transform: translateY(8px); filter: blur(4px); }
+.reveal-seq.show > * {
+  opacity: 1; transform: translateY(0); filter: blur(0);
+}
+.reveal-seq.show > *:nth-child(1) { transition: .45s ease; }
+.reveal-seq.show > *:nth-child(2) { transition: .55s ease; }
+.reveal-seq.show > *:nth-child(3) { transition: .65s ease; }
+.reveal-seq.show > *:nth-child(4) { transition: .75s ease; }
+
+/* -------- Corazones sutiles ascendentes (opcional) -------- */
+.heart-float {
+  position: fixed;
+  bottom: -20px;
+  left: var(--x, 50%);
+  font-size: var(--size, 16px);
+  opacity: .9;
+  transform: translateX(-50%);
+  animation: floatUp 2.4s ease-in forwards;
+  pointer-events: none;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,.35));
+  z-index: 90;
+}
+@keyframes floatUp {
+  0%   { transform: translate(-50%, 0) scale(.9); opacity: .0; }
+  10%  { opacity: 1; }
+  70%  { transform: translate(-50%, -60vh) scale(1.08); opacity: .95; }
+  100% { transform: translate(-50%, -72vh) scale(1.05); opacity: 0; }
+}
