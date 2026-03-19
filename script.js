@@ -84,17 +84,51 @@ function renderGallery() {
   const grid = document.getElementById("galleryGrid");
   if (!grid) return;
   grid.innerHTML = "";
+
+  // Referencias al Lightbox que están al final de tu HTML
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightboxImg");
+
   PHOTOS.forEach((it) => {
     const frame = document.createElement("figure");
     frame.className = "polaroid";
+
+    // --- IMPORTANTE: AGREGAR ESTAS LÍNEAS PARA EL CLIC ---
+    // Hacemos que la polaroid sea clicable
+    frame.style.cursor = "pointer"; // Cambia el cursor para indicar clic
+    frame.addEventListener("click", () => {
+        if (lightbox && lightboxImg) {
+            lightboxImg.src = it.src; // Pone la foto clicada en el lightbox
+            lightboxImg.alt = it.caption; // Pone el pie de foto como alt
+            lightbox.classList.remove("hidden"); // Muestra el lightbox
+            lightbox.style.display = "flex"; // Lo asegura como flex (centrado)
+        }
+    });
+    // ---------------------------------------------------
+
     const img = document.createElement("img");
     img.src = it.src;
     img.style.width = "100%";
+
     const cap = document.createElement("figcaption");
     cap.className = "caption";
     cap.textContent = it.caption;
+
     frame.appendChild(img);
     frame.appendChild(cap);
     grid.appendChild(frame);
   });
+
+  // --- OBLIGATORIO: CERRAR EL LIGHTBOX AL CLICAR FUERA ---
+  // Esta parte asegura que si tocan fuera de la foto, el visor se cierre
+  if (lightbox) {
+    lightbox.addEventListener("click", (e) => {
+        // Solo cerramos si hacen clic en el fondo, no en la imagen misma
+        if (e.target === lightbox) {
+            lightbox.classList.add("hidden");
+            lightbox.style.display = "none";
+            lightboxImg.src = ""; // Limpiamos la imagen
+        }
+    });
+  }
 }
