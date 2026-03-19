@@ -1,47 +1,57 @@
-// Esperamos a que todo el contenido esté listo
-window.addEventListener("load", () => {
-  console.log("Página cargada correctamente");
+// Función principal que se dispara al hacer clic
+function abrirCarta() {
+  console.log("Botón presionado");
 
-  const btnOpen = document.getElementById("openLetterBtn");
+  // Referencias
   const hero = document.getElementById("hero");
   const letter = document.getElementById("letter");
   const music = document.getElementById("music");
   const gallery = document.getElementById("gallery");
+  const overlay = document.getElementById("entryOverlay");
 
-  if (!btnOpen) {
-    console.error("No se encontró el botón con ID 'openLetterBtn'");
-    return;
+  // 1. Mostrar el overlay de "Abriendo..." inmediatamente
+  if (overlay) {
+    overlay.classList.remove("hidden");
+    overlay.style.display = "flex";
   }
 
-  btnOpen.addEventListener("click", (e) => {
-    e.preventDefault();
-    console.log("Click en el botón detectado");
+  // 2. Pequeño retraso para que la animación se vea
+  setTimeout(() => {
+    // Ocultar portada
+    if (hero) hero.classList.add("hidden");
 
-    // 1. Ocultar la portada inmediatamente
-    if (hero) {
-      hero.style.display = "none"; 
-      // Usamos style.display por si la clase .hidden tiene conflictos en el CSS
+    // Mostrar contenido
+    if (letter) {
+        letter.classList.remove("hidden");
+        letter.style.display = "block";
+    }
+    if (music) {
+        music.classList.remove("hidden");
+        music.style.display = "block";
+    }
+    if (gallery) {
+        gallery.classList.remove("hidden");
+        gallery.style.display = "block";
     }
 
-    // 2. Mostrar las secciones (Carta, Música, Galería)
-    const secciones = [letter, music, gallery];
-    secciones.forEach(sec => {
-      if (sec) {
-        sec.classList.remove("hidden");
-        sec.style.display = "block"; // Aseguramos que sea visible
-      }
-    });
+    // Llenar datos dinámicos
+    renderLetter();
+    renderGallery();
 
-    // 3. Ejecutar el llenado de datos
-    renderLetter(LETTER_PARAGRAPHS);
-    renderGallery(PHOTOS);
+    // Ocultar overlay tras cargar
+    if (overlay) {
+      setTimeout(() => {
+        overlay.classList.add("hidden");
+        overlay.style.display = "none";
+      }, 500);
+    }
 
-    // 4. Subir al inicio
+    // Ir al inicio de la carta
     window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-});
+  }, 1000);
+}
 
-// --- Datos que alimentan la página ---
+// Datos
 const LETTER_PARAGRAPHS = [
   "Gracias por ser como eres.",
   "Gracias por acompañarme incluso en la distancia.",
@@ -59,27 +69,27 @@ const PHOTOS = [
   { src: "assets/8.jpeg", caption: "Obviamente mi moto es más bonita" }
 ];
 
-function renderLetter(paragraphs) {
+function renderLetter() {
   const container = document.getElementById("letterContent");
   if (!container) return;
   container.innerHTML = "";
-  paragraphs.forEach(p => {
+  LETTER_PARAGRAPHS.forEach(p => {
     const el = document.createElement("p");
     el.textContent = p;
     container.appendChild(el);
   });
 }
 
-function renderGallery(items) {
+function renderGallery() {
   const grid = document.getElementById("galleryGrid");
   if (!grid) return;
   grid.innerHTML = "";
-  items.forEach((it) => {
+  PHOTOS.forEach((it) => {
     const frame = document.createElement("figure");
     frame.className = "polaroid";
     const img = document.createElement("img");
     img.src = it.src;
-    img.style.width = "100%"; // Para que no se rompa el diseño
+    img.style.width = "100%";
     const cap = document.createElement("figcaption");
     cap.className = "caption";
     cap.textContent = it.caption;
