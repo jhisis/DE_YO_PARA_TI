@@ -146,20 +146,32 @@ body {
   font-size: .92rem;
 }
 
-/* Lightbox */
+/* --- Estilos para el Visor de Fotos (Lightbox) --- */
 .lightbox {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,.7);
-  display: grid;
-  place-items: center;
-  z-index: 50;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Fondo negro muy oscuro */
+    z-index: 9999; /* Por encima de todo */
+    display: none; /* Oculto por defecto */
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
 }
+
+.lightbox.hidden {
+    display: none !important;
+}
+
 .lightbox img {
-  max-width: 92vw; max-height: 88vh;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.15);
-  box-shadow: 0 10px 30px rgba(0,0,0,.35);
-  cursor: zoom-out;
+    max-width: 90%;
+    max-height: 90%;
+    border: 5px solid #fff; /* Marco blanco para que resalte */
+    border-radius: 5px;
+    object-fit: contain; /* Asegura que la foto no se corte */
 }
 .lightbox.hidden { display: none; }
 
