@@ -164,7 +164,7 @@ body {
 .lightbox.hidden { display: none; }
 
 .hidden {
-  display: none;
+    display: none !important;
 }
 .intro-note {
   color: var(--muted);
